@@ -1,11 +1,22 @@
 {% load static %}
 
 <div class="container">
-    <header class="d-flex justify-content-center py-3">
-      <ul class="nav nav-pills">
-        <li class="nav-item"><a href="{% url 'otoshimonoapp:index' %}" class="nav-link active" aria-current="page">Home</a></li>
-        <li class="nav-item"><a href="{% url 'otoshimonoapp:list' %}" class="nav-link">List</a></li>
-        <li class="nav-item"><a href="{% url 'otoshimonoapp:about' %}" class="nav-link">About</a></li>
-      </ul>
-    </header>
-  </div>
+  <header class="d-flex justify-content-center py-3">
+    <ul class="nav nav-pills" id="pills-tab" role="tablist">
+      <li class="nav-item"><a href="{% url 'otoshimonoapp:index' %}" id="nav-index" class="nav-link" data-bs-toggle="pills" role="tab" aria-selected="true">Home</a></li>
+      <li class="nav-item"><a href="{% url 'otoshimonoapp:list' %}" id="nav-list" class="nav-link" data-bs-toggle="pills" role="tab" aria-selected="false">List</a></li>
+      <li class="nav-item"><a href="{% url 'otoshimonoapp:about' %}" id="nav-about" class="nav-link" data-bs-toggle="pills" role="tab" aria-selected="false">About</a></li> 
+    </ul>
+  </header>
+</div>
+
+<script>
+  var url = window.location.href;
+  if (url.match("/list/")) {
+    $("#nav-list").addClass("active");
+  } else if (url.match("/about/")) {
+    $("#nav-about").addClass("active");
+  } else {
+    $("#nav-index").addClass("active");
+  }
+</script>
