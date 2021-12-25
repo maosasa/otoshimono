@@ -1,7 +1,7 @@
 {% if latest_otoshimono_list %}
     <ul>
     {% for otoshimono in latest_otoshimono_list %}
-        <li><a href="{% url 'detail' otoshimono.id %}">{{ otoshimono.obj_name }}</a></li>
+        <li><a href="{% url 'otoshimonoapp:detail' otoshimono.id %}">{{ otoshimono.obj_name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
