@@ -1,9 +1,26 @@
-{% if latest_otoshimono_list %}
-    <ul>
-    {% for otoshimono in latest_otoshimono_list %}
-        <li><a href="{% url 'otoshimonoapp:detail' otoshimono.id %}">{{ otoshimono.obj_name }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>落とし物はありません</p>
-{% endif %}
+{% extends 'otoshimonoapp/base.html' %}
+
+{% block title %}おとしものSNS{% endblock %}
+
+{% block header %}{% include "otoshimonoapp/header.html" %}{% endblock %}
+
+{% block contents %}
+
+    {% if latest_otoshimono_list %}
+        <ul>
+        {% for otoshimono in latest_otoshimono_list %}
+            <div class="card" style="width: 18rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                <h5 class="card-title">{{ otoshimono.obj_name }}</h5>
+                <p class="card-text">{{otoshimono.place_found}}</p>
+                <a href="{% url 'otoshimonoapp:detail' otoshimono.id %}" class="btn btn-primary">詳しくみる</a>
+                </div>
+            </div>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>落とし物はありません</p>
+    {% endif %}
+
+{% endblock %}

@@ -1,3 +1,14 @@
+{% extends 'otoshimonoapp/base.html' %}
+
+{% block contents %}
 <h1>{{ otoshimono.obj_name }}</h1>
-{{ otoshimono.pub_date }}
-{{ otoshimono.place_found }}
+<div class="date">
+    {{ otoshimono.pub_date }}
+</div>
+<div class="place_found">
+    {{ otoshimono.place_found }}
+</div>
+<button class="btn btn-primary" onclick="history.back(-1)">戻る</button>
+<button type="button" class="btn btn-primary">見つかった</button>
+
+{% endblock %}
