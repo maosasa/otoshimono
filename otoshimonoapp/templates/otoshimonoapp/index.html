@@ -1,0 +1,9 @@
+{% if latest_otoshimono_list %}
+    <ul>
+    {% for otoshimono in latest_otoshimono_list %}
+        <li><a href="/app/{{ otoshimono.id }}/">{{ otoshimono.obj_name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>落とし物はありません</p>
+{% endif %}
