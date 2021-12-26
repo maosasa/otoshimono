@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ('obj_name', models.CharField(max_length=200)),
                 ('place_found', models.CharField(default='', max_length=200)),
                 ('pub_date', models.DateTimeField(verbose_name='date published')),
-                ('image', models.ImageField(default='media/no_image.jpg', upload_to='media/')),
+                ('image', models.ImageField(default='otoshimono/no_image.jpg', upload_to='otoshimono/')),
             ],
         ),
     ]
