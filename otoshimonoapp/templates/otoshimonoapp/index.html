@@ -10,7 +10,7 @@
         <ul>
         {% for otoshimono in latest_otoshimono_list %}
             <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+                <img src="media/{{ otoshimono.image }}" class="card-img-top" alt="...">
                 <div class="card-body">
                 <h5 class="card-title">{{ otoshimono.obj_name }}</h5>
                 <p class="card-text">{{otoshimono.place_found}}</p>
