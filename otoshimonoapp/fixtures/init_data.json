@@ -6,7 +6,7 @@
             "obj_name": "ハンカチ", 
             "place_found": "新宿駅", 
             "pub_date": "2021-12-25T08:21:37Z",
-            "image": "media/hankachi.jpeg"
+            "image": "otoshimono/hankachi.jpeg"
         }
     },
     {
@@ -16,7 +16,7 @@
             "obj_name": "マフラー", 
             "place_found": "上野駅", 
             "pub_date": "2021-12-26T08:00:37Z",
-            "image": "media/knit-scarf.png"
+            "image": "otoshimono/knit-scarf.png"
         }
     },
     {
@@ -26,7 +26,7 @@
             "obj_name": "手袋", 
             "place_found": "品川駅", 
             "pub_date": "2021-12-27T08:21:37Z",
-            "image": "media/gloves.jpg"
+            "image": "otoshimono/gloves.jpg"
         }
     }
 ]
