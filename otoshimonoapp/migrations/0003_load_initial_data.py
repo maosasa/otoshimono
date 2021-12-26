@@ -8,7 +8,7 @@ def load_fixture(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('otoshimonoapp', '0002_otoshimonoinfo_place_found'),
+        ('otoshimonoapp', '0001_initial'),
     ]
 
     operations = [
