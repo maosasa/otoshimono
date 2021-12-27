@@ -143,4 +143,5 @@ MEDIA_URL = '/media/'
 
 
 # Activate Django-Heroku.
-django_heroku.settings(locals())
+if os.environ.get('HEROKU_ENV'):
+    django_heroku.settings(locals())
