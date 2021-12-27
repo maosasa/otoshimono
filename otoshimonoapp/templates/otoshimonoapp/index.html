@@ -1,26 +1,48 @@
 {% extends 'otoshimonoapp/base.html' %}
 
-{% block title %}おとしものSNS{% endblock %}
-
-{% block header %}{% include "otoshimonoapp/header.html" %}{% endblock %}
-
 {% block contents %}
+<p><button onclick="getMyPlace()">現在位置を取得</button></p>
+<div id="result"></div>
+<div id="map"></div>
 
-    {% if latest_otoshimono_list %}
-        <ul>
-        {% for otoshimono in latest_otoshimono_list %}
-            <div class="card" style="width: 18rem;">
-                <img src="{{ MEDIA_URL }}{{ otoshimono.image }}" class="card-img-top" alt="...">
-                <div class="card-body">
-                <h5 class="card-title">{{ otoshimono.obj_name }}</h5>
-                <p class="card-text">{{otoshimono.place_found}}</p>
-                <a href="{% url 'otoshimonoapp:detail' otoshimono.id %}" class="btn btn-primary">詳しくみる</a>
-                </div>
-            </div>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>落とし物はありません</p>
-    {% endif %}
+<script>
+function getMyPlace() {
+  var output = document.getElementById("result");
+  if (!navigator.geolocation){//Geolocation apiがサポートされていない場合
+    output.innerHTML = "<p>Geolocationはあなたのブラウザーでサポートされておりません</p>";
+    return;
+  }
+  function success(position) {
+    var latitude  = position.coords.latitude;//緯度
+    var longitude = position.coords.longitude;//経度
+    output.innerHTML = '<p>緯度 ' + latitude + '° <br>経度 ' + longitude + '°</p>';
+    // 位置情報
+    var latlng = new google.maps.LatLng( latitude , longitude ) ;
+    // Google Mapsに書き出し
+    var map = new google.maps.Map( document.getElementById( 'map' ) , {
+        zoom: 15 ,// ズーム値
+        center: latlng ,// 中心座標
+    } ) ;
+    // マーカーの新規出力
+    new google.maps.Marker( {
+        map: map ,
+        position: latlng ,
+    } ) ;
+  };
+  function error() {
+    //エラーの場合
+    output.innerHTML = "座標位置を取得できません";
+  };
+  navigator.geolocation.getCurrentPosition(success, error);//成功と失敗を判断
+}
+
+var MyLatLng = new google.maps.LatLng(35.6811673, 139.7670516);
+var Options = {
+ zoom: 15,      //地図の縮尺値
+ center: MyLatLng,    //地図の中心座標
+ mapTypeId: 'roadmap'   //地図の種類
+};
+var map = new google.maps.Map(document.getElementById('map'), Options);
+</script>
 
 {% endblock %}
