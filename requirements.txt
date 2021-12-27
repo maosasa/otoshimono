@@ -1,2 +1,4 @@
 Django
 pillow
+django-environ
+psycopg2-binary
