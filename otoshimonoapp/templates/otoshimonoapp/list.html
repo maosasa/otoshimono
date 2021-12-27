@@ -3,11 +3,22 @@
 {% block title %}おとしもの一覧{% endblock %}
 
 {% block contents %}
+    <style>
+        @media (max-width: 576px) {
+            div.card-group {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
     {% if latest_otoshimono_list %}
-        <ul>
+        <div class="card-group p-3">
         {% for otoshimono in latest_otoshimono_list %}
-            <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+            <div class="card m-1 border border-2 rounded-3" style="width: 18rem; max-width: 18rem; min-width: 12rem">
+                <div class="overflow-hidden rounded d-flex align-items-center justify-content-center" style="height: 45%">
+                    <img src="{{ MEDIA_URL }}{{ otoshimono.image }}" class="img-fluid" alt="ないよ" style="max-height: 100%">
+                </div>
                 <div class="card-body">
                 <h5 class="card-title">{{ otoshimono.obj_name }}</h5>
                 <p class="card-text">{{otoshimono.place_found}}</p>
@@ -15,7 +26,7 @@
                 </div>
             </div>
         {% endfor %}
-        </ul>
+        </div>
     {% else %}
         <p>落とし物はありません</p>
     {% endif %}
