@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 import environ
+import django_heroku
 
 env = environ.Env()
 if not os.environ.get('HEROKU_ENV'):
@@ -139,3 +140,7 @@ MEDIA＿ROOT = os.path.join(BASE_DIR, 'media')
 
 # 画像をdjango側で読み込むための設定
 MEDIA_URL = '/media/'
+
+
+# Activate Django-Heroku.
+django_heroku.settings(locals())
