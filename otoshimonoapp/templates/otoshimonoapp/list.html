@@ -22,9 +22,9 @@
                 <div class="card-body">
                 <h5 class="card-title">{{ otoshimono.obj_name }}</h5>
                 <p class="card-text">{{otoshimono.place_found}}</p>
-                <a href="{% url 'otoshimonoapp:detail' otoshimono.id %}" class="btn btn-primary">詳しくみる</a>
-                </div>
+                <a href="{% url 'otoshimonoapp:detail' otoshimono.id %}" class="btn btn-primary" style="float: right">詳しくみる</a>
             </div>
+        </div>
         {% endfor %}
         </div>
     {% else %}
