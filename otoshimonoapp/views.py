@@ -39,8 +39,10 @@ def add(request):
             obj_name=title,
             place_found=place_found,
             place_now=place_now,
-            pub_date=timezone.new()
+            pub_date=timezone.now(),
         )
+        if 'image' in request.FILES:
+            new_otoshimono.image = request.FILES['image']
         new_otoshimono.save()
         context = {}
     return render(request, 'otoshimonoapp/form.html', context)
