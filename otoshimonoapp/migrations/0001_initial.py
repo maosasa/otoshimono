@@ -17,6 +17,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('obj_name', models.CharField(max_length=200)),
                 ('place_found', models.CharField(default='', max_length=200)),
+                ('place_now', models.CharField(default='見つけた場所と同じ', max_length=200)),
                 ('pub_date', models.DateTimeField(verbose_name='date published')),
                 ('image', models.ImageField(default='otoshimono/no_image.jpg', upload_to='otoshimono/')),
             ],
