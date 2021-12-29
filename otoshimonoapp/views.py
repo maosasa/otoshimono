@@ -42,7 +42,13 @@ def add(request):
             pub_date=timezone.now(),
         )
         if 'image' in request.FILES:
-            new_otoshimono.image = request.FILES['image']
+            limit_image_size = 10* 1024 * 1024
+            if request.FILES['image'].size > limit_image_size:
+                return render(request, 'otoshimonoapp/form.html', {
+                    'error_message': "Image size must be less than 30MB.",
+                })
+            else:
+                new_otoshimono.image = request.FILES['image']
         new_otoshimono.save()
         context = {}
     return render(request, 'otoshimonoapp/form.html', context)
