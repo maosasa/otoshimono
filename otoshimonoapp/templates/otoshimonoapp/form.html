@@ -10,11 +10,11 @@
         <fieldset>
             <div class="mb-3">
                 <label for="title" class="form-label">おとしものの名前</label>
-                <input type="text" name="title" class="form-control" id="title">
+                <input type="text" name="title" class="form-control" id="title" required>
             </div>
             <div class="mb-3">
                 <label for="place_found" class="form-label">見つけた場所</label>
-                <input type="text" name="place_found" class="form-control" id="place_found">
+                <input type="text" name="place_found" class="form-control" id="place_found" required>
             </div>
             <div class="mb-3">
                 <label for="place_now" class="form-label">届け先</label>
@@ -28,6 +28,16 @@
         <div class='p-3' style="overflow: auto">
             <button type="submit" class="btn btn-primary" style="float: right">Submit</button>
         </div>
+        {% if error_message %}
+        <div>
+            <label>{{ error_message }}</label>
+        </div>
+        {% endif %}
+        {% if success_message %}
+        <div>
+            <label>{{ success_message }}</label>
+        </div>
+        {% endif %}
     </form>
 </div>
 {% endblock %}

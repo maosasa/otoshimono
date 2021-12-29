@@ -45,11 +45,10 @@ def add(request):
             limit_image_size = 10* 1024 * 1024
             if request.FILES['image'].size > limit_image_size:
                 return render(request, 'otoshimonoapp/form.html', {
-                    'error_message': "Image size must be less than 30MB.",
+                    'error_message': "Image size must be less than 10MB.",
                 })
             else:
                 new_otoshimono.image = request.FILES['image']
         new_otoshimono.save()
-        context = {}
+        context = {'success_message': "「"+title+"」 が追加されました。ご報告ありがとうございます。"}
     return render(request, 'otoshimonoapp/form.html', context)
-
