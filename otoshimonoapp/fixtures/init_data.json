@@ -19,7 +19,7 @@
             "place_found": "上野駅", 
             "place_now": "見つけた場所と同じ",
             "pub_date": "2021-12-26T08:00:37Z",
-            "location": "{ \"lat\": 35.6811673, \"lng\": 139.7670516 }",
+            "location": "{ \"lat\": 35.6921673, \"lng\": 139.7370016 }",
             "image": "otoshimono/knit-scarf.png"
         }
     },
@@ -31,7 +31,7 @@
             "place_found": "品川駅", 
             "place_now": "見つけた場所と同じ",
             "pub_date": "2021-12-27T08:21:37Z",
-            "location": "{ \"lat\": 35.6811673, \"lng\": 139.7670516 }",
+            "location": "{ \"lat\": 35.7211613, \"lng\": 139.8070316 }",
             "image": "otoshimono/gloves.jpg"
         }
     }
