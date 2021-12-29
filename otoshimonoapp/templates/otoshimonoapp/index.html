@@ -43,6 +43,15 @@ var Options = {
  mapTypeId: 'roadmap'   //地図の種類
 };
 var map = new google.maps.Map(document.getElementById('map'), Options);
+
+var latest_otoshimono_list = JSON.parse("{{ latest_otoshimono_list|escapejs }}")
+latest_otoshimono_list.forEach((otoshimono) => {
+    var latlng = JSON.parse(otoshimono.location)
+    new google.maps.Marker( {
+        map: map,
+        position: latlng,
+    } ) ;
+});
 </script>
 
 <!-- Google Map -->

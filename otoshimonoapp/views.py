@@ -1,11 +1,21 @@
 from django.shortcuts import get_object_or_404, render
 from django.utils import timezone
+import json
+import uuid
+from datetime import datetime, date
 
 from .models import OtoshimonoInfo
 
+# json.dumpでJSON型に変換できない型の例外処理
+def convertDataToJson(object):
+    if isinstance(object, (datetime, date)):
+        return object.isoformat()
+    elif(isinstance(object, uuid.UUID)):
+        return str(object)
+
 def index(request):
     latest_otoshimono_list = OtoshimonoInfo.objects.order_by('-pub_date')[:100]
-    context = {'latest_otoshimono_list': latest_otoshimono_list}
+    context = {'latest_otoshimono_list': json.dumps(list(latest_otoshimono_list.values()), ensure_ascii=False, default=convertDataToJson)}
     return render(request, 'otoshimonoapp/index.html', context)
 
 def detail(request, otoshimono_id):
