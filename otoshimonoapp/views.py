@@ -30,6 +30,7 @@ def add(request):
         title = request.POST['title']
         place_found = request.POST['place_found']
         place_now = request.POST['place_now']
+        location = request.POST['location']
     except (KeyError, OtoshimonoInfo.DoesNotExist):
         return render(request, 'otoshimonoapp/form.html', {
             'error_message': "You didn't fill the title.",
@@ -40,6 +41,7 @@ def add(request):
             place_found=place_found,
             place_now=place_now,
             pub_date=timezone.now(),
+            location=location,
         )
         if 'image' in request.FILES:
             limit_image_size = 10* 1024 * 1024
