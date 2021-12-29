@@ -3,27 +3,31 @@
 {% block title %}おとしもの情報投稿{% endblock %}
 
 {% block contents %}
-<p>おとしもの情報投稿</p>
-<form action="{% url 'otoshimonoapp:add' %}" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    <fieldset>
-        <div class="mb-3">
-            <label for="title" class="form-label">おとしものの名前</label>
-            <input type="text" name="title" class="form-control" id="title">
+<div class='container'>
+    <p>おとしもの情報投稿</p>
+    <form action="{% url 'otoshimonoapp:add' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset>
+            <div class="mb-3">
+                <label for="title" class="form-label">おとしものの名前</label>
+                <input type="text" name="title" class="form-control" id="title">
+            </div>
+            <div class="mb-3">
+                <label for="place_found" class="form-label">見つけた場所</label>
+                <input type="text" name="place_found" class="form-control" id="place_found">
+            </div>
+            <div class="mb-3">
+                <label for="place_now" class="form-label">届け先</label>
+                <input type="text" name="place_now" class="form-control" id="place_now" value="見つけた場所と同じ">
+            </div>
+            <div class="mb-3">
+                <label for="place_now" class="form-label">落とし物画像</label>
+                <input type="file" name="image" class="form-control" id="image" accept="image/jpeg, image/png">
+            </div>
+        </fieldset>
+        <div class='p-3' style="overflow: auto">
+            <button type="submit" class="btn btn-primary" style="float: right">Submit</button>
         </div>
-        <div class="mb-3">
-            <label for="place_found" class="form-label">見つけた場所</label>
-            <input type="text" name="place_found" class="form-control" id="place_found">
-        </div>
-        <div class="mb-3">
-            <label for="place_now" class="form-label">届け先</label>
-            <input type="text" name="place_now" class="form-control" id="place_now" value="見つけた場所と同じ">
-        </div>
-        <div class="mb-3">
-            <label for="place_now" class="form-label">落とし物画像</label>
-            <input type="file" name="image" class="form-control" id="image" accept="image/jpeg, image/png">
-        </div>
-    </fieldset>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+    </form>
+</div>
 {% endblock %}
