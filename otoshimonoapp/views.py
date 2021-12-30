@@ -15,7 +15,10 @@ def convertDataToJson(object):
 
 def index(request):
     latest_otoshimono_list = OtoshimonoInfo.objects.order_by('-pub_date')[:100]
-    context = {'latest_otoshimono_list': json.dumps(list(latest_otoshimono_list.values()), ensure_ascii=False, default=convertDataToJson)}
+    context = {
+        'latest_otoshimono_list': json.dumps(list(latest_otoshimono_list.values()), ensure_ascii=False, default=convertDataToJson),
+        'image_url_list': json.dumps([item.image.url for item in latest_otoshimono_list], ensure_ascii=False, default=convertDataToJson)
+        }
     return render(request, 'otoshimonoapp/index.html', context)
 
 def detail(request, otoshimono_id):
