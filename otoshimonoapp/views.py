@@ -38,6 +38,10 @@ def form(request):
     context = {}
     return render(request, 'otoshimonoapp/form.html', context)
 
+def form_location(request):
+    context = {}
+    return render(request, 'otoshimonoapp/form_location.html', context)
+
 def add(request):
     try:
         title = request.POST['title']

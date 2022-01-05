@@ -1,0 +1,112 @@
+{% extends 'otoshimonoapp/base.html' %}
+{% load static %}
+{% block contents %}
+<div class="p-1">
+    <button class="btn btn-primary" onclick="getMyPlace()">現在位置に移動</button>
+    <label class="py-1 px-3" id="result"></label>
+    <button class="btn btn-primary" onclick="passLocationData()">位置情報を入力</button>
+</div>
+<div id="map"></div>
+<script src="https://maps.google.com/maps/api/js?key={{ GMAP_APIKEY }}&language=ja"></script>
+<script>
+// ロード時に位置情報を取得する
+// 成功時: 現在位置を中心に地図を表示
+// 失敗時: 東京駅を中心に地図を表示
+
+// DOM関係
+var output = document.getElementById("result");
+
+async function getMyPlace() {
+  if (!navigator.geolocation){//Geolocation apiがサポートされていない場合
+    output.innerHTML = "Geolocationはあなたのブラウザーでサポートされておりません";
+    return;
+  }
+  function success(position) {
+    var latitude  = position.coords.latitude;//緯度
+    var longitude = position.coords.longitude;//経度
+    output.innerHTML = '緯度 ' + latitude + '°,  経度 ' + longitude + '°';
+    // 位置情報
+    var latlng = new google.maps.LatLng( latitude , longitude );
+    // Google Mapsに書き出し
+    map.setCenter(latlng);
+  };
+  function error() {
+    //エラーの場合
+    output.innerHTML = "座標位置を取得できません";
+  };
+  navigator.geolocation.getCurrentPosition(success, error);//成功と失敗を判断
+}
+function passLocationData() {
+    var center = map.getCenter();
+    var uri = encodeURI("{% url 'otoshimonoapp:form' %}?lat="+center.lat()+"&lng="+center.lng());
+    location.href = uri;
+}
+
+function parseAddress() {
+    geocoder.geocode(
+        {
+            'latLng': map.getCenter(),
+        },
+        function(results, status){
+            if(status==google.maps.GeocoderStatus.OK){
+                var output = document.getElementById("result");
+                output.innerHTML = results[0].formatted_address.replace(/^日本, /, '');
+            }
+        }
+    );
+}
+
+var initial_centor = new google.maps.LatLng(35.6811673, 139.7670516);
+var Options = {
+ zoom: 15,      //地図の縮尺値
+ center: initial_centor,    //地図の中心座標
+ mapTypeId: 'roadmap'   //地図の種類
+};
+var map = new google.maps.Map(document.getElementById('map'), Options)
+console.log(map);
+var geocoder = new google.maps.Geocoder();
+map.addListener('center_changed', () => {
+    parseAddress();
+});
+
+function parseAddress() {
+    geocoder.geocode(
+        {
+            'latLng': map.getCenter(),
+        },
+        function(results, status){
+            if(status==google.maps.GeocoderStatus.OK){
+                var output = document.getElementById("result");
+                output.innerHTML = results[0].formatted_address.replace(/^日本, /, '');
+            }
+        }
+    );
+}
+</script>
+
+<!-- Google Map -->
+<style>
+html { height: 100% }
+body { height: 100% }
+#map { height: 100%; width: 100%}
+
+
+body, html, #map { height: 100%; margin: 0 }
+#map {
+    position: relative;
+}
+
+#map:after {
+    width: 22px;
+    height: 40px;
+    display: block;
+    content: ' ';
+    position: absolute;
+    top: 50%; left: 50%;
+    margin: -40px 0 0 -11px;
+    background: url('{% static "otoshimonoapp/img/map_pin.png" %}');
+    background-size: 22px 40px; /* Since I used the HiDPI marker version this compensates for the 2x size */
+    pointer-events: none; /* This disables clicks on the marker. Not fully supported by all major browsers, though */
+}
+</style>
+{% endblock %}

@@ -12,4 +12,5 @@ urlpatterns = [
     path('form/', views.form, name="form"),
     path('list/', views.listing, name="list"),
     path('add/', views.add, name="add"),
+    path('form/location/', views.form_location, name="form_location"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
