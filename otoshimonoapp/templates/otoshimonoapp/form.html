@@ -18,8 +18,9 @@
             </div>
             <div class="mb-3">
                 <button type="button" class="btn btn-primary" onclick="getLocation()">現在地を追加</button>
+                <button type="button" class="btn btn-primary" onclick="redirect('{% url 'otoshimonoapp:form_location' %}')">地図から位置情報を追加</button>
                 <label class="mx-3" id="location_result">位置情報が追加されていません。</label>
-                <input type="hidden" name="location" id="location_input">
+                <input type="text" class="d-transparent" name="location" id="location_input" required>
             </div>
             <div class="mb-3">
                 <label for="place_now" class="form-label">届け先</label>
@@ -70,6 +71,29 @@ function getLocation() {
   output.innerHTML = "位置情報を取得中です。"
   navigator.geolocation.getCurrentPosition(success, error);//成功と失敗を判断
 }
+function redirect(path) {
+  var title = document.getElementById('title').value
+  var place_found = document.getElementById('place_found').value
+  var place_now = document.getElementById('place_now').value
+  var image = document.getElementById('image').value
+  sessionStorage.setItem('title', title);
+  sessionStorage.setItem('place_found', place_found);
+  sessionStorage.setItem('place_now', place_now);
+  sessionStorage.setItem('image', image);
+  window.location.href = path;
+}
+
+window.onload = function() {
+  var form_elements = ['title', 'place_found', 'place_now', 'image'];
+  form_elements.forEach((el) => {
+    try {
+      var v = sessionStorage.getItem(el);
+      document.getElementById(el).value = v;
+    } catch(error) {
+      return;
+    }
+  })
+};
 
 var queryString = window.location.search;
 var queryObject = new Object();
@@ -95,4 +119,11 @@ if ("lat" in queryObject && "lng" in queryObject) {
     button.value = JSON.stringify(latlng);
 }
 </script>
+
+<style>
+.d-transparent {
+  opacity: 0;
+  width: 0px;
+}
+</style>
 {% endblock %}

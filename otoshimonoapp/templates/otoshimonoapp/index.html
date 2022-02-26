@@ -40,7 +40,11 @@ var map = new google.maps.Map(document.getElementById('map'), Options);
 var latest_otoshimono_list = JSON.parse("{{ latest_otoshimono_list|escapejs }}");
 var image_url_list = JSON.parse("{{ image_url_list|escapejs }}");
 latest_otoshimono_list.forEach((otoshimono, i) => {
-    var latlng = JSON.parse(otoshimono.location)
+    try {
+        var latlng = JSON.parse(otoshimono.location);
+    } catch (error) {
+        return;
+    }
     const marker = new google.maps.Marker({
         map: map,
         position: latlng,
