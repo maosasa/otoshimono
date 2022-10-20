@@ -1,9 +1,10 @@
-from django.shortcuts import get_object_or_404, render
-from django.utils import timezone
-from django.contrib import messages
 import json
 import uuid
-from datetime import datetime, date
+from datetime import date, datetime
+
+from django.contrib import messages
+from django.shortcuts import get_object_or_404, render
+from django.utils import timezone
 
 from otoshimonoapp.forms import OtoshimonoRegisterForm
 
@@ -22,8 +23,12 @@ def convertDataToJson(object):
 def index(request):
     latest_otoshimono_list = OtoshimonoInfo.objects.order_by('-pub_date')[:100]
     context = {
-        'latest_otoshimono_list': json.dumps(list(latest_otoshimono_list.values()), ensure_ascii=False, default=convertDataToJson),
-        'image_url_list': json.dumps([item.image.url for item in latest_otoshimono_list], ensure_ascii=False, default=convertDataToJson)
+        'latest_otoshimono_list': json.dumps(list(latest_otoshimono_list.values()),
+                                             ensure_ascii=False,
+                                             default=convertDataToJson),
+        'image_url_list': json.dumps([item.image.url for item in latest_otoshimono_list],
+                                     ensure_ascii=False,
+                                     default=convertDataToJson)
     }
     return render(request, 'otoshimonoapp/index.html', context)
 

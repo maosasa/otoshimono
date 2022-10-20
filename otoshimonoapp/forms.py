@@ -1,5 +1,3 @@
-from dataclasses import fields
-from pyexpat import model
 from django import forms
 
 from otoshimonoapp.models import OtoshimonoInfo
@@ -26,7 +24,7 @@ class OtoshimonoRegisterForm(forms.ModelForm):
 
     def clean_image(self):
         image = self.cleaned_data["image"]
-        if image != None:
+        if image is not None:
             if image.size > self.limit_image_size:
                 raise forms.ValidationError(
                     '画像は10MB以下のものをアップロードしてください',
