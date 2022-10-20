@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from django.utils import timezone
+from django.contrib import messages
 import json
 import uuid
 from datetime import datetime, date
@@ -59,17 +60,10 @@ def add(request):
     if not is_valid:
         return render(request, 'otoshimonoapp/form.html', {'form': form})
 
-    cleaned_data = form.cleaned_data
-    new_otoshimono = OtoshimonoInfo(
-        obj_name=cleaned_data["obj_name"],
-        place_found=cleaned_data["place_found"],
-        place_now=cleaned_data["place_now"],
-        pub_date=timezone.now(),
-        location=cleaned_data["location"],
-    )
-    if cleaned_data["image"] != None:
-        new_otoshimono.image = cleaned_data["image"]
-    new_otoshimono.save()
-    context = {'success_message': "「" +
-               cleaned_data["obj_name"]+"」 が追加されました。ご報告ありがとうございます。"}
+    otoshimono = form.save(commit=False)
+    otoshimono.pub_date = timezone.now()
+    otoshimono.save()
+
+    messages.info(request, f"「{otoshimono.obj_name}」 が追加されました。ご報告ありがとうございます。")
+    context = {}
     return render(request, 'otoshimonoapp/form.html', context)
